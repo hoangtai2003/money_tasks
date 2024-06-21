@@ -1,7 +1,11 @@
 <template>
   <h1>Đây là trang chi tiết</h1>
   <div class="item" v-for="transaction in transactions" :key="transaction.id">
-      <router-link :to="`transaction/${transaction.id}`">{{ transaction.name }}</router-link>
+      <!-- <router-link :to="`transaction/${transaction.id}`">{{ transaction.name }}</router-link> -->
+       <router-link 
+            :to="{name: 'transactiondetail', 
+            params: {id: transaction.id}}"> {{ transaction.name }}
+       </router-link>
       <div class="price">{{ transaction.price }}</div>
   </div>
 </template>

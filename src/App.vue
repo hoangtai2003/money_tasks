@@ -1,7 +1,8 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/transaction">Transaction</router-link>
+    <!-- Trong trường hợp sau này thay đổi path thì chỗ này nên sử dụng name -->
+    <router-link :to="{ name: 'home' }">Home</router-link> |
+    <router-link :to="{ name: 'transaction' }">Transaction</router-link>
   </nav>
   <router-view/>
 </template>
