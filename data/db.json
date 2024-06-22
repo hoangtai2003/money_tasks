@@ -1,0 +1,19 @@
+{
+    "transactions": [
+        {
+            "id": 1,
+            "name": "Đi siêu thị ngày 28/5",
+            "price": 1000000
+        },
+        {
+            "id": 2,
+            "name": "Thanh toán tiền nhà",
+            "price": 2000000
+        },
+        {
+            "id": 3,
+            "name": "Thanh toán tiền điện nước",
+            "price": 3000000
+        }
+    ]
+}
