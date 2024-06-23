@@ -10,17 +10,21 @@
         <p>Loading transaction {{ $route.params.id  }} .....</p>
      </div>
 </template>
-<script>
-    export default {
-        data() {
-            return {
-                transaction: null
-            }
-        },
-        async created() {
-            const response = await fetch("http://localhost:3000/transactions/" + this.$route.params.id)
-            const data = await response.json()
-            this.transaction = data
-        }
+<script setup>
+import { ref, onMounted } from "vue"
+import { useRoute} from "vue-router"
+
+const route  = useRoute();
+const transaction = ref(null)
+const getOneDataTransaction = async () =>  {
+    try {
+        const response = await fetch(`http://localhost:3000/transactions/${route.params.id}` );
+        transaction.value = await response.json();
+    } catch (error) {
+        console.error("Error fetching transactions:", error);
     }
+}
+onMounted(() => {
+    getOneDataTransaction();
+}) 
 </script>

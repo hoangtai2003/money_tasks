@@ -11,26 +11,19 @@
     </div>
   <div v-else>Loading transaction.....</div>
 </template>
-<script>
-export default {
-    data() {
-        return {
-            transactions: []
-        };
-    },
-    // Cách 1: sử dụng await vì đây là dữ liệu bất đồng bộ
-    // Sử dụng await trước một Promise nó sẽ tạm dừng thực thi của hàm cho đến khi Promise đó được giải quyết hoặc từ chối
-    // async created() {
-    //     // Thực thi hàm sẽ tạm dừng ở đây cho đến khi yêu cầu fetch hoàn thành và Promise trả về bởi fetch được giải quyết với đối tượng phản hồi.
-    //     const response = await fetch("http://localhost:3000/transactions")
-    //     const data = await response.json()
-    //     this.transactions = data
-    // }
-    // Cách 2
-    created() {
-        fetch("http://localhost:3000/transactions")
-            .then((response) => response.json())
-            .then((data) => this.transactions = data)
+<script setup>
+import { ref, onMounted } from "vue"
+
+const transactions = ref([])
+const getAllDataTransaction = async () =>  {
+    try {
+        const response = await fetch("http://localhost:3000/transactions");
+        transactions.value = await response.json();
+    } catch (error) {
+        console.error("Error fetching transactions:", error);
     }
 }
+onMounted(() => {
+    getAllDataTransaction();
+}) 
 </script>

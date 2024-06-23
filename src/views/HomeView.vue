@@ -21,8 +21,8 @@ export default {
             "Đom Đóm"
         ]);
         const customerFilter = computed(() => {
-            customer.filter((customer) => customer.includes(searchText.value))
-        })
+            return customers.filter((customer) => customer.includes(searchText.value));
+        });
         return {searchText, customerFilter}
     }
 }
