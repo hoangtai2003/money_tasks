@@ -12,16 +12,13 @@
   <div v-else>Loading transaction.....</div>
 </template>
 <script setup>
-import { ref, onMounted } from "vue"
+import { onMounted, computed } from "vue"
+import { useStore } from "vuex";
 
-const transactions = ref([])
+const store  = useStore()
+const transactions = computed(() => store.state.transaction.transactions)
 const getAllDataTransaction = async () =>  {
-    try {
-        const response = await fetch("http://localhost:3000/transactions");
-        transactions.value = await response.json();
-    } catch (error) {
-        console.error("Error fetching transactions:", error);
-    }
+    store.dispatch("transaction/fetchAllTransactions")
 }
 onMounted(() => {
     getAllDataTransaction();
